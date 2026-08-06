@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@sophsbleh – TikTok Tracker</title>
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --card: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #888;
+      --accent: #fe2c55;
+      --blue: #25f4ee;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: system-ui, sans-serif; padding: 24px; }
+    h1 { font-size: 1.8rem; margin-bottom: 4px; }
+    h1 span { color: var(--accent); }
+    .meta { color: var(--muted); font-size: .85rem; margin-bottom: 24px; }
+    .stats { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+    .stat { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+             padding: 20px 28px; text-align: center; }
+    .stat .num { font-size: 2rem; font-weight: 700; color: var(--blue); }
+    .stat .lbl { font-size: .8rem; color: var(--muted); margin-top: 4px; }
+    h2 { margin: 24px 0 12px; font-size: 1.2rem; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    th { text-align: left; padding: 8px 12px; color: var(--muted); border-bottom: 1px solid var(--border); }
+    td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tr:hover td { background: var(--card); }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: .75rem; font-weight: 600; }
+    .badge.repost { background: #2a1a3a; color: #c084fc; }
+    .badge.orig  { background: #0a2a2a; color: var(--blue); }
+    .badge.new   { background: #1a2e1a; color: #4ade80; }
+    .badge.upd   { background: #2a2010; color: #fbbf24; }
+    .thumb { width: 56px; height: 56px; object-fit: cover; border-radius: 6px; display: block; }
+    .mono { font-family: monospace; font-size: .8rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <h1>@<span>sophsbleh</span> – TikTok Tracker</h1>
+  <p class="meta">Zuletzt geprüft: 2026-08-06 11:02:32 UTC</p>
+
+    <div class="stats">
+    <div class="stat"><div class="num">0</div><div class="lbl">Videos gesamt</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">Originals</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">Reposts</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">Stories archiviert</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">Events geloggt</div></div>
+  </div>
+
+  <h2>📋 Letzte Events</h2>
+  <table>
+    <thead><tr><th>Zeit (UTC)</th><th>Event</th><th>Video-ID</th><th>Details</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <h2>📖 Stories (archiviert, neueste zuerst)</h2>
+  <table>
+    <thead><tr><th>Thumb</th><th>Gesehen (UTC)</th><th>Titel</th><th>Download</th></tr></thead>
+    <tbody><tr><td colspan="4" style="color:var(--muted);padding:16px">Noch keine Stories erfasst</td></tr></tbody>
+  </table>
+
+  <h2>🎬 Alle Videos (neueste zuerst)</h2>
+  <table>
+    <thead><tr><th>Thumb</th><th>Typ</th><th>Datum</th><th>Titel</th><th>Views</th><th>Likes</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <p style="margin-top:40px;color:var(--muted);font-size:.75rem;">
+    Automatisch generiert · 2026-08-06 11:02 UTC
+  </p>
+</body>
+</html>
