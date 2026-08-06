@@ -1,0 +1,63 @@
+name: TikTok Tracker
+
+on:
+  schedule:
+    # Every 30 minutes
+    - cron: "*/30 * * * *"
+  workflow_dispatch: # allow manual trigger
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install yt-dlp rich schedule
+
+      - name: Run tracker
+        env:
+          TIKTOK_USERNAME: ${{ vars.TIKTOK_USERNAME }}
+        run: python tracker.py "$TIKTOK_USERNAME"
+
+      - name: Build dashboard
+        env:
+          TIKTOK_USERNAME: ${{ vars.TIKTOK_USERNAME }}
+        run: python build_dashboard.py "$TIKTOK_USERNAME"
+
+      - name: Commit data & dashboard
+        run: |
+          git config user.name "TikTok Tracker Bot"
+          git config user.email "bot@github-actions"
+          git add data/ docs/
+          git diff --cached --quiet || git commit -m "chore: update tracker data $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
+
+  deploy-pages:
+    needs: track
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/
+      - id: deployment
+        uses: actions/deploy-pages@v4
